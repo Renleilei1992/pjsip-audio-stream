@@ -26,6 +26,7 @@ void MainWidget::on_startBtn_clicked()
                                                 ui->remotePortEdt->text().toUInt()))
     {
         QMessageBox::warning(this, tr("AudioStream"), "启动失败", QMessageBox::Ok);
+        return;
     }
     ui->stopBtn->setEnabled(true);
     ui->startBtn->setEnabled(false);

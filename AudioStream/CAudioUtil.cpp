@@ -251,6 +251,10 @@ pj_status_t CAudioUtil::CreateAudStream(pj_pool_t* pPool,
 		CAudioUtil::s_strErr = "create stream failed";
 		return status;
 	}
+
+    /* Start media transport */
+    pjmedia_transport_media_start(pTransport, 0, 0, 0, 0);
+
 	return PJ_SUCCESS;
 }
 
