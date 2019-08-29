@@ -29,13 +29,13 @@ bool CMediaSession::InitSession(const char* pszIP)
 	}
 	int nRet;
 	sockaddr_in srvAddr;
-	// ´´½¨socket
+	// åˆ›å»ºsocket
 	m_fdRTP = socket(AF_INET, SOCK_DGRAM, 0);
 	if (m_fdRTP < 0)
 	{
 		return false;
 	}	
-	// ÉèÖÃsocketÊôĞÔÎª·Ç×èÈû
+	// è®¾ç½®socketå±æ€§ä¸ºéé˜»å¡
 	int old_opt = fcntl(m_fdRTP, F_GETFL);
 	int new_opt = old_opt | O_NONBLOCK;
 	fcntl(m_fdRTP, F_SETFL, new_opt);
@@ -129,7 +129,7 @@ void CMediaSession::OnRecvRTP(int fd, sockaddr_in& addr, char* cRtpData, size_t 
 	if (fd == m_fdRTP)
 	{
 		bool bExit = false;
-		// ·¢ËÍ¸ø»á»°ÖĞÆäËû¿Í»§¶Ë
+		// å‘é€ç»™ä¼šè¯ä¸­å…¶ä»–å®¢æˆ·ç«¯
 		for (int i = 0; i < nSize; i++)
 		{
 			if (0 == memcmp(&addr, &m_vClientData[i].addr, sizeof(addr)))
@@ -167,7 +167,7 @@ void CMediaSession::TimerRemoveInvaildClient()
 			iter->bVaild = false;
 			++iter;
 		}
-		else // ¶¨Ê±ÖÜÆÚÄÚÃ»ÓĞÊÕµ½Êı¾İ£¬ÔòÉ¾³ı
+		else // å®šæ—¶å‘¨æœŸå†…æ²¡æœ‰æ”¶åˆ°æ•°æ®ï¼Œåˆ™åˆ é™¤
 		{
 			iter = m_vClientData.erase(iter);
 		}

@@ -1,14 +1,14 @@
 #pragma once
 #include "CPortManage.h"
 #include <vector>
-#define MS_USE_RTCP			// ÊÇ·ñÊ¹ÓÃrtcp(TODO)
-#define MS_AUTO_JOIN		// ×Ô¶¯¼ÓÈë»á»°
+#define MS_USE_RTCP			// æ˜¯å¦ä½¿ç”¨rtcp(TODO)
+#define MS_AUTO_JOIN		// è‡ªåŠ¨åŠ å…¥ä¼šè¯
 typedef struct MS_CLIENT_DATA
 {
 	sockaddr_in addr;
 	bool bVaild;
 }MS_CLIENT_DATA;
-// TODOËø±£»¤
+// TODOé”ä¿æŠ¤
 class CMediaSession
 {
 public:
@@ -21,7 +21,7 @@ public:
 	void Add(int fd, sockaddr_in addr);
 	void Remove(int fd, sockaddr_in addr);
 	void OnRecvRTP(int fd, sockaddr_in& addr, char* cRtpData, size_t szDataSize);
-	// ¶¨Ê±ÒÆ³ıÎŞĞ§¿Í»§¶Ë£¬·ÇÏß³Ì°²È«
+	// å®šæ—¶ç§»é™¤æ— æ•ˆå®¢æˆ·ç«¯ï¼Œéçº¿ç¨‹å®‰å…¨
 	void TimerRemoveInvaildClient();
 	int GetClientNum();
 private:
@@ -30,7 +30,7 @@ private:
 #ifdef MS_USE_RTCP
 	int m_fdRTCP;
 #endif
-	// ´æ´¢µ±Ç°Ã½Ìå»á»°ÖĞËùÓĞµÄ¿Í»§Êı¾İ
+	// å­˜å‚¨å½“å‰åª’ä½“ä¼šè¯ä¸­æ‰€æœ‰çš„å®¢æˆ·æ•°æ®
 	std::vector<MS_CLIENT_DATA> m_vClientData;
 };
 

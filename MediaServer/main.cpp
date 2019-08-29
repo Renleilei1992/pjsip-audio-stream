@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 	}
 	printf("init ports success\n");
 	CUdpServer srv(ip);
-	// ²âÊÔ
+	// æµ‹è¯•
 	int nID1 = srv.CreateSession();
 	if (nID1 == -1)
 	{

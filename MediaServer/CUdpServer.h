@@ -3,9 +3,9 @@
 #include <vector>
 #include "CMediaSession.h"
 #define RTP_BUFFER_SIZE 1500
-#define	US_TIMEOUT		10000		// ³¬Ê±Ã»ÓĞrtpÊı¾İÔòÒÆ³ı£¬µ¥Î»ms
-//#define US_TIMEOUT_DELETE_SESSION	// ³¬Ê±×Ô¶¯É¾³ı¿Õ»á»°
-// TODOËø±£»¤
+#define	US_TIMEOUT		10000		// è¶…æ—¶æ²¡æœ‰rtpæ•°æ®åˆ™ç§»é™¤ï¼Œå•ä½ms
+//#define US_TIMEOUT_DELETE_SESSION	// è¶…æ—¶è‡ªåŠ¨åˆ é™¤ç©ºä¼šè¯
+// TODOé”ä¿æŠ¤
 
 class CUdpServer
 {
@@ -17,7 +17,7 @@ public:
 	void Loop();
 	void StopLoop();
 private:
-	// »á»°²ÉÓÃ30s×Ô¶¯É¾³ı,´Ë½Ó¿Ú²»±©Â¶£¨»òÕß¸ÄÎªÒì²½°²È«£©
+	// ä¼šè¯é‡‡ç”¨30sè‡ªåŠ¨åˆ é™¤,æ­¤æ¥å£ä¸æš´éœ²ï¼ˆæˆ–è€…æ”¹ä¸ºå¼‚æ­¥å®‰å…¨ï¼‰
 	void DestroySession(int nSessionID);
 	bool AddReadEvent(CMediaSession* pms);
 	bool RemoveReadEvent(CMediaSession* pms);
@@ -27,7 +27,7 @@ private:
 	std::string m_strIP;
 	std::vector<CMediaSession*> m_vpMediaSessions;
 	char m_buffer[RTP_BUFFER_SIZE];
-	// ÓÃÓÚ»½ĞÑepoll_wait
+	// ç”¨äºå”¤é†’epoll_wait
 	int m_pipefd[2];
 };
 

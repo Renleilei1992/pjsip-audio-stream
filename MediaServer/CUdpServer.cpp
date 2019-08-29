@@ -8,9 +8,9 @@ CUdpServer::CUdpServer(char* pszIP)
 	, m_strIP(pszIP)
 {
 	m_epfd = epoll_create(1024);
-	// ´´½¨¹ÜµÀ
+	// åˆ›å»ºç®¡é“
 	assert(0 == pipe(m_pipefd));
-	// ×¢²á¶ÁÊÂ¼ş
+	// æ³¨å†Œè¯»äº‹ä»¶
 	struct epoll_event ev;
 	ev.events = EPOLLIN;
 	ev.data.ptr = NULL;
@@ -96,12 +96,12 @@ void CUdpServer::TimerEvent()
 	std::vector<CMediaSession*>::iterator it;
 	for (it = m_vpMediaSessions.begin(); it != m_vpMediaSessions.end();)
 	{
-		// ÒÆ³ı³¬Ê±¿Í»§¶Ë
+		// ç§»é™¤è¶…æ—¶å®¢æˆ·ç«¯
 		(*it)->TimerRemoveInvaildClient();
 		if (0 == (*it)->GetClientNum())
 		{
 #ifdef US_TIMEOUT_DELETE_SESSION
-			// ×Ô¶¯É¾³ı¿Õ»á»°
+			// è‡ªåŠ¨åˆ é™¤ç©ºä¼šè¯
 			RemoveReadEvent(*it);
 			(*it)->CloseSession();
 			delete (*it);
@@ -139,24 +139,24 @@ void CUdpServer::Loop()
 		{
 			break;
 		}
-		// ³¬Ê±Ê±¼äµ½£¬´¦Àí¶¨Ê±ÈÎÎñ£¬ÖØÖÃ¶¨Ê±Æ÷
+		// è¶…æ—¶æ—¶é—´åˆ°ï¼Œå¤„ç†å®šæ—¶ä»»åŠ¡ï¼Œé‡ç½®å®šæ—¶å™¨
 		if (0 == nfds)
 		{
-			// ´¦Àí¶¨Ê±ÈÎÎñ
+			// å¤„ç†å®šæ—¶ä»»åŠ¡
 			TimerEvent();
-			// ÖØÖÃ¶¨Ê±Æ÷
+			// é‡ç½®å®šæ—¶å™¨
 			timeout = US_TIMEOUT;
 			continue;
 		}
-		// ³¬Ê±Ê±¼äÎ´µ½£¬¼ì²éÊ£ÓàË¯ÃßÊ±¼ä
+		// è¶…æ—¶æ—¶é—´æœªåˆ°ï¼Œæ£€æŸ¥å‰©ä½™ç¡çœ æ—¶é—´
 		end = time(NULL);
 		timeout -= (end - start) * 1000;
-		// Ê£ÓàË¯ÃßÊ±¼ä<=0ËµÃ÷¼´³¬Ê±ÓÖÓĞ¿É¶ÁÊÂ¼ş´¥·¢
+		// å‰©ä½™ç¡çœ æ—¶é—´<=0è¯´æ˜å³è¶…æ—¶åˆæœ‰å¯è¯»äº‹ä»¶è§¦å‘
 		if (timeout <= 0)
 		{
-			// ´¦Àí¶¨Ê±ÈÎÎñ
+			// å¤„ç†å®šæ—¶ä»»åŠ¡
 			TimerEvent();
-			// ÖØÖÃ¶¨Ê±Æ÷
+			// é‡ç½®å®šæ—¶å™¨
 			timeout = US_TIMEOUT;
 		}
 		for (int i = 0; i < nfds; i++)
@@ -164,12 +164,12 @@ void CUdpServer::Loop()
 			CMediaSession* pms = (CMediaSession*)events[i].data.ptr;
 			if (NULL == pms)
 			{
-				// »½ĞÑpipeÃ»ÓĞpms
+				// å”¤é†’pipeæ²¡æœ‰pms
 				continue;
 			}
 			if (events[i].events & EPOLLIN)
 			{
-				// TODO Çø·ÖfdrtpºÍfdrtcp
+				// TODO åŒºåˆ†fdrtpå’Œfdrtcp
 				fdRTP = pms->GetRTPfd();
 				slLen = sizeof(addr);
 				szRecv = recvfrom(fdRTP, m_buffer, RTP_BUFFER_SIZE, 0,
@@ -186,6 +186,6 @@ void CUdpServer::Loop()
 void CUdpServer::StopLoop()
 {
 	m_bRuning = false;
-	// pipeÓÃ¶ÁĞ´read write£¬²»ÓÃsend recv
+	// pipeç”¨è¯»å†™read writeï¼Œä¸ç”¨send recv
 	write(m_pipefd[1], "1", 1);
 }

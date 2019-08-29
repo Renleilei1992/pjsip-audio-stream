@@ -14,7 +14,7 @@ CPortManage::~CPortManage()
 
 bool CPortManage::InitPorts(in_port_t uStartPort, in_port_t uEndPort)
 {
-	// ±£Ö¤¶Ë¿ÚÅ¼Êı¿ªÊ¼£¬ÖÁÉÙ2¸ö¶Ë¿Ú
+	// ä¿è¯ç«¯å£å¶æ•°å¼€å§‹ï¼Œè‡³å°‘2ä¸ªç«¯å£
 	if (uEndPort - uStartPort < 2 || uStartPort % 2 != 0 || uEndPort % 2 != 0)
 	{
 		return false;
