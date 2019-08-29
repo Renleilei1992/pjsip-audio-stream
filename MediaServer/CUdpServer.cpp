@@ -17,7 +17,6 @@ CUdpServer::CUdpServer(char* pszIP)
 	epoll_ctl(m_epfd, EPOLL_CTL_ADD, m_pipefd[0], &ev);
 }
 
-
 CUdpServer::~CUdpServer()
 {
 	std::vector<CMediaSession*>::iterator it;

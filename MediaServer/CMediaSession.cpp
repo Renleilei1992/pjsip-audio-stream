@@ -6,6 +6,7 @@
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <stdio.h>
 
 CMediaSession::CMediaSession()
 	: m_pPort(NULL)
@@ -125,6 +126,7 @@ void CMediaSession::Remove(int fd, sockaddr_in addr)
 
 void CMediaSession::OnRecvRTP(int fd, sockaddr_in& addr, char* cRtpData, size_t szDataSize)
 {
+	printf("recv rtp\n");
 	int nSize = m_vClientData.size();
 	if (fd == m_fdRTP)
 	{
