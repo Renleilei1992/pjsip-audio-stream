@@ -59,10 +59,10 @@ win32 {
         # 依赖模块
         CONFIG(debug, debug|release) {
             LIBS += \
-                -L$$PWD/pjproject-2.9/lib/win libpjproject-i386-Win32-vc14-Debug.lib
+                    -L$$PWD/pjproject-2.9/lib/win libpjproject-i386-Win32-vc14-Debug.lib
         } else {
             LIBS += \
-                -L$$PWD/pjproject-2.9/lib/win libpjproject-i386-Win32-vc14-Release.lib
+                    -L$$PWD/pjproject-2.9/lib/win libpjproject-i386-Win32-vc14-Release.lib
         }
         LIBS += ws2_32.lib Ole32.lib
     }
@@ -72,10 +72,15 @@ win32 {
 # Mac平台下配置
 # ***********************************************************
 macos {
-    # 输出目录
-    CONFIG(debug, debug|release) {
-
-    } else {
-
-    }
+    LIBS += \
+            -L$$PWD/pjproject-2.9/lib/mac -lpj-x86_64-apple-darwin18.2.0 \
+            -L$$PWD/pjproject-2.9/lib/mac -lpjmedia-audiodev-x86_64-apple-darwin18.2.0 \
+            -L$$PWD/pjproject-2.9/lib/mac -lpjmedia-x86_64-apple-darwin18.2.0 \
+            -L$$PWD/pjproject-2.9/lib/mac -lwebrtc-x86_64-apple-darwin18.2.0 \
+            -L$$PWD/pjproject-2.9/lib/mac -lpjlib-util-x86_64-apple-darwin18.2.0 \
+            -L$$PWD/pjproject-2.9/lib/mac -lpjmedia-codec-x86_64-apple-darwin18.2.0 \
+            -L$$PWD/pjproject-2.9/lib/mac -lspeex-x86_64-apple-darwin18.2.0
+    LIBS += \
+            -framework AudioToolbox \
+            -framework CoreAudio
 }
